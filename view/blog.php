@@ -9,8 +9,8 @@
 </head>
 
 <body>
-    <main class="flex">
-        <section class="w-4/5 bg-gradient-to-tr from-rose-100 to-teal-100 p-5">
+    <main class="bg-gradient-to-tr from-rose-100 to-teal-100 ">
+        <section class="  p-5">
             <nav class="flex justify-between items-center w-3/4 m-auto">
                 <span class="flex text-xl font-extrabold text-gray-900  md:text-2xl lg:text-3xl">Wikis
                     <div class="w-2 h-2 rounded-full bg-green-700">
@@ -97,25 +97,7 @@
             </div>
 
         </section>
-        <section class="w-1/5">
-            <div class="">
-                <h1 class="text-1xl font-extrabold text-gray-900  md:text-2xl lg:text-3xl text-center">Tags</h1>
-                <div class="w-4/5 m-auto my-5">
-                    <button type="button" class="text-white bg-gray-800 hover:bg-gray-900  font-medium rounded-xl text-sm  py-2  px-3  my-2">IT</button>
-                    <button type="button" class="text-white bg-gray-800 hover:bg-gray-900  font-medium rounded-xl text-sm  py-2  px-3  my-2">Géologie</button>
-                    <button type="button" class="text-white bg-gray-800 hover:bg-gray-900  font-medium rounded-xl text-sm  py-2  px-3  my-2">Extraterrestre</button>
-                    <button type="button" class="text-white bg-gray-800 hover:bg-gray-900  font-medium rounded-xl text-sm  py-2  px-3  my-2">Maroc</button>
-                    <button type="button" class="text-white bg-gray-800 hover:bg-gray-900  font-medium rounded-xl text-sm  py-2  px-3  my-2">coupe du monde</button>
-                    <button type="button" class="text-white bg-gray-800 hover:bg-gray-900  font-medium rounded-xl text-sm  py-2 px-3 my-2 ">base de données</button>
-                    <button type="button" class="text-white bg-gray-800 hover:bg-gray-900  font-medium rounded-xl text-sm  py-2  px-3  my-2">restauration</button>
 
-
-                </div>
-            </div>
-
-
-
-        </section>
     </main>
 </body>
 
