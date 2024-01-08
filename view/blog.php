@@ -79,7 +79,7 @@
                             <a href="#">
                                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy technology acquisitions 2021</h5>
                             </a>
-                            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
+                            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far,.</p>
                             <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                 Read more
                                 <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
@@ -98,8 +98,22 @@
 
         </section>
         <section class="w-1/5">
-            <h1 class="text-1xl font-extrabold text-gray-900  md:text-2xl lg:text-3xl">Tags</h1>
-            
+            <div class="">
+                <h1 class="text-1xl font-extrabold text-gray-900  md:text-2xl lg:text-3xl text-center">Tags</h1>
+                <div class="w-4/5 m-auto my-5">
+                    <button type="button" class="text-white bg-gray-800 hover:bg-gray-900  font-medium rounded-xl text-sm  py-2  px-3  my-2">IT</button>
+                    <button type="button" class="text-white bg-gray-800 hover:bg-gray-900  font-medium rounded-xl text-sm  py-2  px-3  my-2">Géologie</button>
+                    <button type="button" class="text-white bg-gray-800 hover:bg-gray-900  font-medium rounded-xl text-sm  py-2  px-3  my-2">Extraterrestre</button>
+                    <button type="button" class="text-white bg-gray-800 hover:bg-gray-900  font-medium rounded-xl text-sm  py-2  px-3  my-2">Maroc</button>
+                    <button type="button" class="text-white bg-gray-800 hover:bg-gray-900  font-medium rounded-xl text-sm  py-2  px-3  my-2">coupe du monde</button>
+                    <button type="button" class="text-white bg-gray-800 hover:bg-gray-900  font-medium rounded-xl text-sm  py-2 px-3 my-2 ">base de données</button>
+                    <button type="button" class="text-white bg-gray-800 hover:bg-gray-900  font-medium rounded-xl text-sm  py-2  px-3  my-2">restauration</button>
+
+
+                </div>
+            </div>
+
+
 
         </section>
     </main>
