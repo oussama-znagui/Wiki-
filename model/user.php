@@ -7,7 +7,7 @@ class User{
     private $role;
 
     public function __construct(){
-
+        
     }
 
     public function __get($prop){
@@ -17,6 +17,6 @@ class User{
     {
         return $this->$prop = $value;
     }
-    
+
 
 }

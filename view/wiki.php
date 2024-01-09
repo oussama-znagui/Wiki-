@@ -75,7 +75,7 @@
             </span>
             <div class="my-5">
                 <a href="index.php" class="mx-1">Accueil</a>
-                <a href="blog.php" class="mx-1">Categories</a>
+                <a href="cat.php" class="mx-1">Categories</a>
                 <a href="login.php" class="mx-1">Connectez-vous</a>
                 <a href="signup.php" class="mx-1">Creez votre compte</a>
             </div>
