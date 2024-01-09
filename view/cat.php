@@ -43,6 +43,25 @@
                         </svg>
                     </a>
                 </div>
+                <?php
+                if (1 == 1) {
+                ?>
+
+                    <div>
+                        <a href="login.php" class="text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-5 py-2.5">Login</a>
+                        <a href="signup.php" class="text-gray-900 border-2 border border-gray-300  hover:bg-gray-100  font-medium rounded-lg text-sm px-5 py-2.5 ">signup</a>
+                    </div>
+                <?php
+                } else {
+                ?>
+                    <div>
+                        <a href="login.php" class="text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-5 py-2.5">Login</a>
+                        <a href="signup.php" class="text-gray-900 border-2 border border-gray-300  hover:bg-gray-100  font-medium rounded-lg text-sm px-5 py-2.5 ">signup</a>
+                    </div>
+                    
+                <?php
+                }
+                ?>
             </nav>
             <div class="text-center w-3/4 m-auto my-10">
                 <h1 class="text-1xl font-extrabold text-gray-900  md:text-2xl lg:text-3xl">Bienvenue dans la categorie CAT#1</h1>

@@ -1,6 +1,8 @@
 <?php
 session_start();
 include "../model/categorie.php";
+include "../config/connexion.php";
+
 $Categories = Categorie::getCategories();
 // print_r($Categories);
 
