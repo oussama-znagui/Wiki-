@@ -32,5 +32,15 @@ CREATE TABLE tags
    id_tag INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     tag VARCHAR(100),
 )
+CREATE TABLE wikisTags
+(
+   id_wikisTags INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+   id_wiki int,
+   id_tag int,
+   FOREIGN KEY (id_wiki) REFERENCES wikis (id_wiki)
+    FOREIGN KEY (id_tag) REFERENCES tags (id_tag)
+   
+)
+
 
 
