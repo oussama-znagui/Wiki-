@@ -91,7 +91,7 @@ $Categories = Categorie::getCategories();
 
             ?>
 
-                <a href="">
+                <a href="cat.php?<?php echo $Categorie->__get('id_cat') ?>">
                     <div class="rounded-lg h-60		 bg-gray-300 max-w-full  bg-[url('../media/home.jpg')] bg-cover	bg-center	bg-no-repeat">
                         <div class="rounded-lg bg-black opacity-80	 w-full h-full flex justify-center  items-center">
                             <div class='rounded-lg border-neutral-50 border-solid border-2 w-3/4 h-2/4 hover:border-none flex justify-center  items-center font-black text-xl hover:text-3xl ease-in duration-300	'>
