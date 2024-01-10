@@ -1,5 +1,5 @@
 <?php
-include "../config/connexion.php";
+// include "../config/connexion.php";
 class Categorie
 {
     private $id_cat;
