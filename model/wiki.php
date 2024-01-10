@@ -1,5 +1,5 @@
 <?php
-include '../config/connexion.php';
+// include '../config/connexion.php';
 include '../model/categorie.php';
 include '../model/user.php';
 class Wiki
@@ -39,7 +39,7 @@ class Wiki
     public function addWiki()
     {
 
-        $sql = DB::connexion()->prepare("INSERT into wikis values(:id, :titre, :content, :image, :creationDate, :id_user, id_cat)");
+        $sql = DB::connexion()->prepare("INSERT into wikis values(:id, :titre, :content, :image, :creationDate, :id_user, :id_cat)");
         $idUser = $this->user->__get("id_user");
         $idCategorie = $this->categorie->__get("id_cat");
         $id = NULL;
@@ -50,18 +50,18 @@ class Wiki
         $sql->bindParam(":creationDate", $this->crationDate);
         $sql->bindParam(":id_user", $idUser);
         $sql->bindParam(":id_cat", $idCategorie);
-        echo "----> " . $this->titre;
-        echo "----> " . $this->content;
-        echo "----> " . $this->crationDate;
-        echo "----> " . $this->user->__get("id_user");
-        echo "----> " . $this->categorie->__get("id_cat");
-        echo "----> " . $this->image;
+        // echo "----> " . $this->titre;
+        // echo "----> " . $this->content;
+        // echo "----> " . $this->crationDate;
+        // echo "----> " . $this->user->__get("id_user");
+        // echo "----> " . $this->categorie->__get("id_cat");
+        // echo "----> " . $this->image;
         $sql->execute();
     }
 }
-$date = date("d/m/Y");
+$date = date("Y-m-d");
 $wiki = new Wiki(null, 'first wiki', 'no content', '../media/home.jpg', $date, 1, 2, null, "ssg");
 // print_r($wiki);
 
 
-$wiki->addWiki();
+// $wiki->addWiki();

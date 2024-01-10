@@ -7,7 +7,7 @@ class User{
     private $role;
 
     public function __construct(){
-        
+
     }
 
     public function __get($prop){
@@ -17,6 +17,17 @@ class User{
     {
         return $this->$prop = $value;
     }
+
+    public function signup(){
+        $sql = DB::connexion()->prepare("INSERT into users values(:id,:fullName,:email,:pass,:role)");
+        $sql->bindParam(":id",NULL);
+        $sql->bindParam(":fullName", $this->fullName);
+        $sql->bindParam(":email", $this->email);
+        $sql->bindParam(":pass", $this->password);
+        $sql->bindParam(":role", $this->role);
+        $sql->execute();
+        }
+        
 
 
 }
