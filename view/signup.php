@@ -1,3 +1,13 @@
+<?php
+if (@$_GET['error'] == "pass") {
+    $error = 'les deux mots de passe ne sont pas identiques';
+}
+if (@$_GET['error'] == "mail") {
+    $error = 'le mail que vous avez saisi est deja existe';
+}
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -48,41 +58,49 @@
             <div class="w-3/5	 ">
 
 
-                <form class="max-w-sm mx-auto">
+                <form class="max-w-sm mx-auto" method="post" action="../controller/signup.php">
                     <span class="my-5 flex text-1xl font-extrabold text-gray-900  md:text-2xl lg:text-3xl">Connectez-vous
                         <div class="w-2 h-2 rounded-full bg-green-700">
                         </div>
                     </span>
                     <div class="flex gap-4">
                         <div class="mb-5">
-                            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">email</label>
-                            <input type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@flowbite.com" required>
+                            <label class="block mb-2 text-sm font-medium text-gray-900">Nom</label>
+                            <input type="text" name="lName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Alaoui" required>
                         </div>
                         <div class="mb-5">
-                            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">email</label>
-                            <input type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@flowbite.com" required>
+                            <label class="block mb-2 text-sm font-medium text-gray-900 ">email</label>
+                            <input type="text" name="fName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Mouhamed" required>
                         </div>
                     </div>
                     <div class="mb-5">
-                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">email</label>
-                        <input type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@flowbite.com" required>
+                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">email</label>
+                        <input type="email" name="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="name@wikis.com" required>
                     </div>
                     <div class="mb-5">
                         <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">mot de pass</label>
-                        <input type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                        <input type="password" name="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required>
                     </div>
-                    <div class="mb-5">
+                    <div class="">
                         <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirmer le mot de pass</label>
-                        <input type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                        <input type="password" name="cpassword" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
                     </div>
+                    <?php
+                    if (@$error) {
+                    ?>
+                        <p class="text-red-900 my-2"><?php echo @$error ?></p>
 
-                    <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+                    <?php
+                    }
+                    ?>
+
+                    <button type="submit" name="go" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Confirmer</button>
                 </form>
 
             </div>
 
 
-            <img class="w-1/4 " src="../media/home.png" alt="">
+            <img class="w-1/4" src="../media/home.png" alt="">
 
         </div>
 

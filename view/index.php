@@ -54,13 +54,21 @@ $Categories = Categorie::getCategories();
                 </a>
             </div>
             <?php
-            if (1 == 1) {
+            if (!@$_SESSION['user']) {
             ?>
 
                 <div>
                     <a href="login.php" class="text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-5 py-2.5">Login</a>
                     <a href="signup.php" class="text-gray-900 border-2 border border-gray-300  hover:bg-gray-100  font-medium rounded-lg text-sm px-5 py-2.5 ">signup</a>
                 </div>
+            <?php
+            } else {
+            ?>
+                <div>
+                    <a href="addwiki.php" class="text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-5 py-2.5">Creer un wiki</a>
+                    <a href="../controller/logout.php" class="text-gray-900 border-2 border border-gray-300  hover:bg-gray-100  font-medium rounded-lg text-sm px-5 py-2.5 ">logout</a>
+                </div>
+
             <?php
             }
             ?>
