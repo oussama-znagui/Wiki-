@@ -1,14 +1,15 @@
 <?php
+
 if (!$_POST) {
     header('Location: ../view/index.php');
     die("erroor");
 }
-session_start();
+
 
 
 include '../config/connexion.php';
 include '../model/user.php';
-
+session_start();
 $email = $_POST['email'];
 $password = $_POST['password'];
 $user = new User();
@@ -18,5 +19,11 @@ if (!$user->login()) {
     header('Location: ../view/login.php?error=log');
     die('error');
 } else {
-    echo "1111";
+
+
+
+    // print_r($user->login());
+    $_SESSION['user'] = $user->login();
+    print_r($_SESSION['user']);
+    header('Location: ../view/index.php');
 }

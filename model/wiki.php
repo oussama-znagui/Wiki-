@@ -58,10 +58,27 @@ class Wiki
         // echo "----> " . $this->image;
         $sql->execute();
     }
+
+    public static function getWikis()
+    {
+        $sql = DB::connexion()->query("SELECT * FROM wikis JOIN categories JOIN users WHERE wikis.id_cat = categories.id_cat AND wikis.id_user = users.id_user;");
+        $sql->execute();
+        $result = $sql->fetchAll(PDO::FETCH_ASSOC);
+        $wikis = array();
+        foreach ($result as $row) {
+            $wiki = new Wiki($row['id_wiki'], $row['titre'], $row['content'], $row['image'], $row['creationDate'], $row['id_user'], $row['id_cat'], $row['categorie'], $row['description']);
+            $wiki->user->__set("fullName", $row['fullName']);
+            array_push($wikis, $wiki);
+        }
+        return $wikis;
+    }
 }
+
+
 $date = date("Y-m-d");
 $wiki = new Wiki(null, 'first wiki', 'no content', '../media/home.jpg', $date, 1, 2, null, "ssg");
 // print_r($wiki);
 
 
 // $wiki->addWiki();
+// print_r(Wiki::getWikis());

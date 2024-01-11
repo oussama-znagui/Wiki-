@@ -1,10 +1,16 @@
 <?php
-session_start();
-include "../model/categorie.php";
-include "../config/connexion.php";
 
+include "../model/categorie.php";
+include "../model/user.php";
+include "../config/connexion.php";
+session_start();
 $Categories = Categorie::getCategories();
 // print_r($Categories);
+// $user = $_SESSION['user'];
+// // print_r($user);
+// var_dump($_SESSION);
+
+// print_r($_SESSION['user']);
 
 ?>
 
@@ -65,6 +71,13 @@ $Categories = Categorie::getCategories();
             } else {
             ?>
                 <div>
+                    <?php
+                    if (@$_SESSION['user']->__get('role') == 0) {
+                    ?>
+                        <a href="profil.php" class="text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-5 py-2.5">Profil</a>
+                    <?php
+                    }
+                    ?>
                     <a href="addwiki.php" class="text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-5 py-2.5">Creer un wiki</a>
                     <a href="../controller/logout.php" class="text-gray-900 border-2 border border-gray-300  hover:bg-gray-100  font-medium rounded-lg text-sm px-5 py-2.5 ">logout</a>
                 </div>
