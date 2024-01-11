@@ -82,9 +82,9 @@ class Wiki
         $row = $sql->fetchAll(PDO::FETCH_ASSOC);
 
 
-        $wiki = new Wiki($row['id_wiki'], $row['titre'], $row['content'], $row['image'], $row['creationDate'], $row['id_user'], $row['id_cat'], $row['categorie'], $row['description']);
-        $wiki->user->__set("fullName", $row['fullName']);
-        array_push($wikis, $wiki);
+        $wiki = new Wiki($row[0]['id_wiki'], $row[0]['titre'], $row[0]['content'], $row[0]['image'], $row[0]['creationDate'], $row[0]['id_user'], $row[0]['id_cat'], $row[0]['categorie'], $row[0]['description']);
+        $wiki->user->__set("fullName", $row[0]['fullName']);
+
 
         return $wiki;
     }
