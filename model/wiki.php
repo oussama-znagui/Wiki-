@@ -73,7 +73,24 @@ class Wiki
         return $wikis;
     }
 
-    public function deleteWiki(){
+
+    public  function getWiki()
+    {
+        $idWiki = $this->id_wiki;
+        $sql = DB::connexion()->query("SELECT * FROM wikis JOIN categories JOIN users WHERE wikis.id_cat = categories.id_cat AND wikis.id_user = users.id_user AND wikis.id_wiki = $idWiki ;");
+        $sql->execute();
+        $row = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+
+        $wiki = new Wiki($row['id_wiki'], $row['titre'], $row['content'], $row['image'], $row['creationDate'], $row['id_user'], $row['id_cat'], $row['categorie'], $row['description']);
+        $wiki->user->__set("fullName", $row['fullName']);
+        array_push($wikis, $wiki);
+
+        return $wiki;
+    }
+
+    public function deleteWiki()
+    {
         $idWiki = $this->id_wiki;
         $sql = DB::connexion()->query("DELETE from wikis where id_wiki = $idWiki");
         $sql->execute();
