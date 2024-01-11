@@ -7,6 +7,7 @@ if (!$_POST) {
 include '../config/connexion.php';
 include '../model/wiki.php';
 $date = date("Y-m-d");
+session_start();
 
 $image_name = $_FILES['image']['name'];
 $tmp_name = $_FILES['image']['tmp_name'];
@@ -26,6 +27,7 @@ $categorie = $_POST["cat"];
 $tags = $_POST["tags"];
 print_r($tags);
 echo $titre;
-
-$wiki = new Wiki(NULL, $titre, $content, $new_name, $date, 1, $categorie, null, null);
+$idUser = $_SESSION['user']->__get('id_user');
+$wiki = new Wiki(NULL, $titre, $content, $new_name, $date, $idUser, $categorie, null, null);
 $wiki->addWiki();
+header('Location: ../view/profil.php');

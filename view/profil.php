@@ -25,10 +25,10 @@ $wikis = Wiki::getWikis();
     <main>
         <section class="bg-gradient-to-tr from-rose-100 to-teal-100 h-auto p-10">
             <nav class="flex justify-between items-center w-3/4 m-auto">
-                <span class="flex text-1xl font-extrabold text-gray-900  md:text-2xl lg:text-3xl">Wikis
-                    <div class="w-2 h-2 rounded-full bg-green-700">
-                    </div>
-                </span>
+                <a href="index.php"><span class="flex text-1xl font-extrabold text-gray-900  md:text-2xl lg:text-3xl">Wikis
+                        <div class="w-2 h-2 rounded-full bg-green-700">
+                        </div>
+                    </span></a>
                 <div class="flex items-center gap-6">
                     <a class="text-gray-700 hover:text-orange-600" aria-label="Visit TrendyMinds LinkedIn" href="" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="h-5">
                             <path fill="currentColor" d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z">
@@ -72,11 +72,11 @@ $wikis = Wiki::getWikis();
             <div class="w-3/4 bg-gray-100 m-auto my-10 rounded-2xl lg:flex text-center justify-around items-center p-5">
                 <div>
                     <h1>Nom complet</h1>
-                    <h1>Oussama znagui</h1>
+                    <h1><?php echo $_SESSION['user']->__get('fullName') ?></h1>
                 </div>
                 <div>
                     <h1>Email</h1>
-                    <h1>znagui.info@gmail.com</h1>
+                    <h1><?php echo $_SESSION['user']->__get('email') ?></h1>
                 </div>
                 <div>
                     <h1>Role</h1>
@@ -114,14 +114,14 @@ $wikis = Wiki::getWikis();
                                                                                                         echo '.....';
                                                                                                     }
                                                                                                     ?>.</p>
-                                    <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                    <a href="" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                         Read more
                                         <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
                                         </svg>
                                     </a>
 
-                                    <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 ">
+                                    <a href="../controller/deletewiki.php?wiki=<?php echo $wiki->__get('id_wiki') ?>" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 ">
                                         <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512">
                                             <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z" />
                                         </svg>
