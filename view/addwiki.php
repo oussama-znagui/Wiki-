@@ -1,7 +1,14 @@
 <?php
 include '../config/connexion.php';
 include '../model/tag.php';
-include "../model/categorie.php";
+
+include "../model/wiki.php";
+
+session_start();
+if (!$_SESSION['user'] || $_SESSION['user']->__get("role") != 0) {
+    header('Location: index.php');
+    die("eroor");
+}
 
 $Categories = Categorie::getCategories();
 $tags = Tag::getTags();
@@ -51,6 +58,13 @@ $tags = Tag::getTags();
                         </path>
                     </svg>
                 </a>
+            </div>
+            <div>
+
+                <a href="profil.php" class="text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-5 py-2.5">Profil</a>
+
+
+                <a href="../controller/logout.php" class="text-gray-900 border-2 border border-gray-300  hover:bg-gray-100  font-medium rounded-lg text-sm px-5 py-2.5 ">logout</a>
             </div>
         </nav>
         <div class="w-3/4 lg:flex justify-center items-center ">
