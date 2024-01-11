@@ -72,6 +72,12 @@ class Wiki
         }
         return $wikis;
     }
+
+    public function deleteWiki(){
+        $idWiki = $this->id_wiki;
+        $sql = DB::connexion()->query("DELETE from wikis where id_wiki = $idWiki");
+        $sql->execute();
+    }
 }
 
 
