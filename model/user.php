@@ -64,11 +64,11 @@ class User
         } else {
             $result = $sql->fetchAll(PDO::FETCH_ASSOC);
             $user = new User();
-            $user->__set("id_user", $result['id_user']);
-            $user->__set("fullName", $result['fullName']);
-            $user->__set("email", $result['email']);
-            $user->__set("password", $result['password']);
-            $user->__set("role", $result['role']);
+            $user->__set("id_user", $result[0]['id_user']);
+            $user->__set("fullName", $result[0]['fullName']);
+            $user->__set("email", $result[0]['email']);
+            $user->__set("password", $result[0]['password']);
+            $user->__set("role", $result[0]['role']);
             return $user;
         }
     }

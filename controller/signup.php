@@ -1,6 +1,7 @@
 <?php
 if (!$_POST) {
     header('Location: ../view/index.php');
+    die("erroor");
 }
 session_start();
 
@@ -15,6 +16,7 @@ $cpassword = $_POST['cpassword'];
 
 if ($password != $cpassword) {
     header('Location: ../view/signup.php?error=pass');
+    die('error');
 } else {
 
     $user = new User();
@@ -24,6 +26,7 @@ if ($password != $cpassword) {
     $user->__set('role', 0);
     if (!$user->checkEmail()) {
         header('Location: ../view/signup.php?error=mail');
+        die('error');
     } else {
         $user->signup();
         $_SESSION['user'] = $user->selectUser();
