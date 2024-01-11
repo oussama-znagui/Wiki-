@@ -61,7 +61,7 @@ class Wiki
 
     public static function getWikis()
     {
-        $sql = DB::connexion()->query("SELECT * FROM wikis JOIN categories JOIN users WHERE wikis.id_cat = categories.id_cat AND wikis.id_user = users.id_user;");
+        $sql = DB::connexion()->query("SELECT * FROM wikis JOIN categories JOIN users WHERE wikis.id_cat = categories.id_cat AND wikis.id_user = users.id_user ORDER by wikis.id_wiki DESC ;");
         $sql->execute();
         $result = $sql->fetchAll(PDO::FETCH_ASSOC);
         $wikis = array();
