@@ -53,12 +53,16 @@ class Categorie
         $sql->execute();
         $row = $sql->fetchAll(PDO::FETCH_ASSOC);
 
-
+        // print_r($row);
         $cat = new Categorie($row[0]['id_cat'], $row[0]['categorie'], $row[0]['description']);
-
-
-
         return $cat;
+    }
+
+    public function DeleteCat()
+    {
+        $idCat = $this->id_cat;
+        $sql = DB::connexion()->query("DELETE from categories where id_cat  = $idCat");
+        $sql->execute();
     }
 }
 
