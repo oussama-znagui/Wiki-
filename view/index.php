@@ -75,10 +75,11 @@ $Categories = Categorie::getCategories();
                     if (@$_SESSION['user']->__get('role') == 0) {
                     ?>
                         <a href="profil.php" class="text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-5 py-2.5">Profil</a>
+                        <a href="addwiki.php" class="text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-5 py-2.5">Creer un wiki</a>
                     <?php
                     }
                     ?>
-                    <a href="addwiki.php" class="text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-5 py-2.5">Creer un wiki</a>
+
                     <a href="../controller/logout.php" class="text-gray-900 border-2 border border-gray-300  hover:bg-gray-100  font-medium rounded-lg text-sm px-5 py-2.5 ">logout</a>
                 </div>
 
@@ -114,7 +115,7 @@ $Categories = Categorie::getCategories();
 
             ?>
 
-                <a href="cat.php?<?php echo $Categorie->__get('id_cat') ?>">
+                <a href="cat.php?cat=<?php echo $Categorie->__get('id_cat') ?>">
                     <div class="rounded-lg h-60		 bg-gray-300 max-w-full  bg-[url('../media/home.jpg')] bg-cover	bg-center	bg-no-repeat">
                         <div class="rounded-lg bg-black opacity-80	 w-full h-full flex justify-center  items-center">
                             <div class='rounded-lg border-neutral-50 border-solid border-2 w-3/4 h-2/4 hover:border-none flex justify-center  items-center font-black text-xl hover:text-3xl ease-in duration-300	'>

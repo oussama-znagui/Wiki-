@@ -18,7 +18,7 @@ if (!$_GET['wiki']) {
 
 $wiki = new Wiki($_GET['wiki'], null, null, null, null, null, null, null, null);
 $wiki = $wiki->getWiki();
-// print_r($wiki);
+
 
 $Categories = Categorie::getCategories();
 $tags = Tag::getTags();
@@ -70,11 +70,19 @@ $tags = Tag::getTags();
                 </a>
             </div>
             <div>
-                <a href="profil.php" class="text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-5 py-2.5">Profil</a>
-
+                <?php
+                if (@$_SESSION['user']->__get('role') == 0) {
+                ?>
+                    <a href="profil.php" class="text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-5 py-2.5">Profil</a>
+                    <a href="addwiki.php" class="text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-5 py-2.5">Creer un wiki</a>
+                <?php
+                }
+                ?>
 
                 <a href="../controller/logout.php" class="text-gray-900 border-2 border border-gray-300  hover:bg-gray-100  font-medium rounded-lg text-sm px-5 py-2.5 ">logout</a>
             </div>
+
+
             </div>
         </nav>
         <div class="w-3/4 lg:flex justify-center items-center ">
@@ -82,27 +90,29 @@ $tags = Tag::getTags();
 
 
                 <form class="flex flex-col justify-center items-center my-5 mx-auto bg-gray-100 p-5 rounded-3xl" method="post" action="../controller/addwiki.php" enctype="multipart/form-data">
-                    <span class=" my-5 flex text-1xl font-extrabold text-gray-900 md:text-2xl lg:text-3xl">Ajouter un article wiki
+                    <span class=" my-5 flex text-1xl font-extrabold text-gray-900 md:text-2xl lg:text-3xl">modifier votre wiki
                         <div class="w-2 h-2 rounded-full bg-green-700">
                         </div>
                     </span>
                     <div class="flex gap-4 items-center">
                         <div class="mb-5 w-2/4">
-                            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Image</label>
-                            <input type="file" name="image" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5" required>
+                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Image</label>
+                            <input type="file" value="<?php echo $wiki->__get('image') ?>" name="image" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5" required>
                         </div>
                         <div class="mb-5 w-2/4">
-                            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Titre</label>
-                            <input type="text" name="titre" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg   block w-full p-2.5 " required>
+                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Titre</label>
+                            <input value="<?php echo $wiki->__get('titre') ?>" type="text" name="titre" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg   block w-full p-2.5 " required>
                         </div>
                     </div>
                     <div class="mb-5 w-full">
-                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">contenu</label>
-                        <textarea name="content" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 " required></textarea>
+                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">contenu</label>
+                        <textarea value="<?php echo $wiki->__get('content') ?>" name="content" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 " required></textarea>
                     </div>
                     <div class="mb-5 w-full">
                         <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">categorie</label>
+
                         <select name="cat" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 " required>
+                            <option value="<?php echo $wiki->categorie->__get('id_cat') ?>"><?php echo $wiki->categorie->__get('titre') ?></option>
                             <?php
                             foreach ($Categories as $cat) {
 

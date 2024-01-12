@@ -23,7 +23,7 @@ $wikis = Wiki::getWikis();
 
 <body>
     <main>
-        <section class="bg-gradient-to-tr from-rose-100 to-teal-100 h-auto p-10">
+        <section class="bg-gradient-to-tr from-rose-100 to-teal-100 h-auto p-10 min-h-screen">
             <nav class="flex justify-between items-center w-3/4 m-auto">
                 <a href="index.php"><span class="flex text-1xl font-extrabold text-gray-900  md:text-2xl lg:text-3xl">Wikis
                         <div class="w-2 h-2 rounded-full bg-green-700">
