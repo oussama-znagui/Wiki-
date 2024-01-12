@@ -40,6 +40,12 @@ if ($_FILES['image']['name']) {
 $newWiki = new Wiki($wiki->__get('id_wiki'), $titre, $content, $new_name, null, null, $categorie, null, null);
 $newWiki->updateWiki();
 
+if (@$_SESSION['user']->__get('role') == 0) {
+    header('Location: ../view/profil.php');
+} elseif ($_SESSION['user']->__get('role') == 1) {
+    header('Location: ../view/dashboard.php');
+}
+
 
 
 // $Categories = Categorie::getCategories();

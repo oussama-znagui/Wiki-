@@ -5,7 +5,7 @@ include '../model/wiki.php';
 include '../model/tag.php';
 
 session_start();
-if (!$_SESSION['user'] || $_SESSION['user']->__get("role") != 0) {
+if (!$_SESSION['user']) {
     header('Location: index.php');
     die("eroor");
 }

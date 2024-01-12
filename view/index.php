@@ -72,6 +72,14 @@ $Categories = Categorie::getCategories();
             ?>
                 <div>
                     <?php
+                    if (@$_SESSION['user']->__get('role') == 1) {
+                    ?>
+                        <a href="dashboard.php" class="text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-5 py-2.5">Dashboard</a>
+
+                    <?php
+                    }
+                    ?>
+                    <?php
                     if (@$_SESSION['user']->__get('role') == 0) {
                     ?>
                         <a href="profil.php" class="text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-5 py-2.5">Profil</a>
