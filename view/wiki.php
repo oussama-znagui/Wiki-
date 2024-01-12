@@ -1,3 +1,21 @@
+<?php
+
+
+include "../model/wiki.php";
+include "../config/connexion.php";
+session_start();
+
+if (!$_GET['wiki']) {
+    header('Location: index.php');
+}
+$idwiki = $_GET['wiki'];
+$wiki = new Wiki($idwiki, null, null, null, null, null, null, null, null);
+$wiki = $wiki->getWiki();
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,10 +30,10 @@
     <main class="bg-gradient-to-tr from-rose-100 to-teal-100 ">
         <section class="  p-5">
             <nav class="flex justify-between items-center w-3/4 m-auto">
-                <span class="flex text-xl font-extrabold text-gray-900  md:text-2xl lg:text-3xl">Wikis
-                    <div class="w-2 h-2 rounded-full bg-green-700">
-                    </div>
-                </span>
+                <a href="index.php"><span class="flex text-xl font-extrabold text-gray-900  md:text-2xl lg:text-3xl">Wikis
+                        <div class="w-2 h-2 rounded-full bg-green-700">
+                        </div>
+                    </span></a>
                 <div class="flex items-center gap-6">
                     <a class="text-gray-700 hover:text-orange-600" aria-label="Visit TrendyMinds LinkedIn" href="" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="h-5">
                             <path fill="currentColor" d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z">
@@ -43,12 +61,47 @@
                         </svg>
                     </a>
                 </div>
+                <?php
+                if (!@$_SESSION['user']) {
+                ?>
+
+                    <div>
+                        <a href="login.php" class="text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-5 py-2.5">Login</a>
+                        <a href="signup.php" class="text-gray-900 border-2 border border-gray-300  hover:bg-gray-100  font-medium rounded-lg text-sm px-5 py-2.5 ">signup</a>
+                    </div>
+                <?php
+                } else {
+                ?>
+                    <div>
+                        <?php
+                        if (@$_SESSION['user']->__get('role') == 1) {
+                        ?>
+                            <a href="dashboard.php" class="text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-5 py-2.5">Dashboard</a>
+
+                        <?php
+                        }
+                        ?>
+                        <?php
+                        if (@$_SESSION['user']->__get('role') == 0) {
+                        ?>
+                            <a href="profil.php" class="text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-5 py-2.5">Profil</a>
+                            <a href="addwiki.php" class="text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-5 py-2.5">Creer un wiki</a>
+                        <?php
+                        }
+                        ?>
+
+                        <a href="../controller/logout.php" class="text-gray-900 border-2 border border-gray-300  hover:bg-gray-100  font-medium rounded-lg text-sm px-5 py-2.5 ">logout</a>
+                    </div>
+
+                <?php
+                }
+                ?>
             </nav>
             <div class="text-center w-3/4 m-auto my-10 lg:flex justify-around items-center gap-6">
-                <div class="my-5 w-2/4 h-80	bg-cover	bg-no-repeat	bg-center	 bg-[url('../media/home.jpg')]"></div>
+                <div class="my-5 w-2/4 h-80	bg-cover	bg-no-repeat	bg-center	 bg-[url('../media/<?php echo $wiki->__get('image') ?>')]"></div>
                 <div class="w-2/4">
-                    <h1 class=" text-1xl font-extrabold text-gray-900  md:text-2xl lg:text-3xl">Titre : Marcel Pagnol </h1>
-                    <p class="text-sm  text-gray-600  md:text-lg lg:text-xl">Creer par Mr Oussama znagui <br> le 25 Janvier 2023 </p>
+                    <h1 class=" text-1xl font-extrabold text-gray-900  md:text-2xl lg:text-3xl">Titre : <?php echo $wiki->__get('titre') ?></h1>
+                    <p class="text-sm  text-gray-600  md:text-lg lg:text-xl">Creer par <?php echo $wiki->user->__get('fullName') ?><br> le <?php echo $wiki->__get('crationDate') ?> </p>
                     <div class="my-4">
 
                         <button type="button" class="m-1 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 ">Dark</button>
@@ -64,7 +117,7 @@
                     </div>
                 </div>
             </div>
-            <p class="text-center w-3/4 m-auto my-10">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatem, reprehenderit explicabo! Magni quos totam assumenda quibusdam fugiat ducimus dolore doloribus earum tempora at velit similique eos, nulla sunt repellendus nesciunt. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum officia excepturi fugiat, architecto repellendus pariatur! Deserunt voluptatibus ut sit commodi mollitia iure aspernatur, libero non. Veritatis quibusdam molestiae corrupti aliquid. Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, neque eum repudiandae provident quos voluptas velit nemo voluptate nihil eveniet nostrum libero. Doloremque consectetur natus adipisci facere? Nostrum, quas blanditiis. Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt odio voluptates amet quia animi impedit architecto velit atque necessitatibus veniam, ex doloribus exercitationem reiciendis. Quasi delectus iste temporibus nisi ducimus? Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum laudantium voluptatum fuga quasi amet quia. Illo, quia quibusdam? Quas necessitatibus rerum rem provident ex velit corporis architecto laboriosam accusamus! Blanditiis.</p>
+            <p class="text-center w-3/4 m-auto my-10"><?php echo $wiki->__get('content') ?></p>
 
 
         </section>

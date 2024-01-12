@@ -64,6 +64,22 @@ class Categorie
         $sql = DB::connexion()->query("DELETE from categories where id_cat  = $idCat");
         $sql->execute();
     }
+
+    public function updateCat()
+    {
+        $idc = $this->id_cat;
+        $titre = "$this->titre";
+        $desc = $this->description;
+
+
+        $sql = DB::connexion()->prepare("UPDATE categories set categorie = :cat, description = :desc where id_cat = :idCat");
+        $sql->bindParam(':cat', $titre);
+        $sql->bindParam(':desc', $desc);
+        $sql->bindParam(':idCat', $idc);
+
+
+        $sql->execute();
+    }
 }
 
 // print_r(Categorie::getCategories());
