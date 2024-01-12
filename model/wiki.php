@@ -95,6 +95,28 @@ class Wiki
         $sql = DB::connexion()->query("DELETE from wikis where id_wiki = $idWiki");
         $sql->execute();
     }
+    public function updateWiki()
+    {
+        $idWiki = $this->id_wiki;
+        $title = "$this->titre";
+        $content = $this->content;
+        $image = $this->image;
+        $cat = $this->categorie->__get('id_cat');
+        echo $idWiki . "   ->";
+        echo $title . "   ->";
+        echo $content . "   ->";
+        echo $image . "   ->";
+        echo $cat . "   ->";
+        $sql = DB::connexion()->prepare("UPDATE wikis set titre = :title, content = :content, image = :image, id_cat = :cat where id_wiki = :idWiki");
+        $sql->bindParam(':idWiki', $idWiki);
+        $sql->bindParam(':title', $title);
+        $sql->bindParam(':content', $content);
+        $sql->bindParam(':image', $image);
+        $sql->bindParam(':cat', $cat);
+
+
+        $sql->execute();
+    }
 }
 
 
