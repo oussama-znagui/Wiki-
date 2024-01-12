@@ -34,6 +34,32 @@ class Categorie
         }
         return $Categories;
     }
+    public function addCategorie()
+    {
+        $id  = null;
+        $titre = $this->titre;
+        $desc = $this->description;
+        $sql = DB::connexion()->prepare("INSERT into categories values(:id, :titre, :desc)");
+        $sql->bindParam(':id', $id);
+        $sql->bindParam(':titre', $titre);
+        $sql->bindParam(':desc', $desc);
+        $sql->execute();
+    }
+
+    public  function getCat()
+    {
+        $idCat = $this->id_cat;
+        $sql = DB::connexion()->query("SELECT * FROM categories WHERE categories.id_cat = $idCat ;");
+        $sql->execute();
+        $row = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+
+        $cat = new Categorie($row[0]['id_cat'], $row[0]['categorie'], $row[0]['description']);
+
+
+
+        return $cat;
+    }
 }
 
 // print_r(Categorie::getCategories());

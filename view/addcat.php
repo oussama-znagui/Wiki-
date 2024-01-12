@@ -61,29 +61,22 @@ if (!$_SESSION['user'] || $_SESSION['user']->__get("role") != 1) {
             <div class="w-3/5	 ">
 
 
-                <form class="max-w-sm mx-auto" method="post" action="../controller/login.php">
+                <form class="max-w-sm mx-auto" method="post" action="../controller/addcat.php">
                     <span class="my-5 flex text-1xl font-extrabold text-gray-900  md:text-2xl lg:text-3xl">Creer une categorie
                         <div class="w-2 h-2 rounded-full bg-green-700">
                         </div>
                     </span>
                     <div class="mb-5">
-                        <label  class="block mb-2 text-sm font-medium text-gray-900">email</label>
-                        <input type="text" name="cat" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "  required>
+                        <label class="block mb-2 text-sm font-medium text-gray-900">Categorie</label>
+                        <input type="text" name="cat" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required>
                     </div>
                     <div class="mb-5">
-                        <label  class="block mb-2 text-sm font-medium text-gray-900">Description</label>
-                        <input type="password" name="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+                        <label class="block mb-2 text-sm font-medium text-gray-900">Description</label>
+                        <textarea type="password" name="content" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required></textarea>
                     </div>
-                    <?php
-                    if (@$error) {
-                    ?>
-                        <p class="text-red-900 my-2"><?php echo @$error ?></p>
 
-                    <?php
-                    }
-                    ?>
 
-                    <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Login</button>
+                    <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Ajouter la categorie</button>
                 </form>
 
             </div>
