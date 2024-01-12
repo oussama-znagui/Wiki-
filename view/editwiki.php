@@ -12,7 +12,7 @@ if (!$_SESSION['user'] || $_SESSION['user']->__get("role") != 0) {
 
 
 if (!$_GET['wiki']) {
-    header('Location: ../view/profil.php');
+    header('Location: profil.php');
     die('errooor');
 }
 
@@ -89,7 +89,7 @@ $tags = Tag::getTags();
             <div class="lg:w-4/5 my-10">
 
 
-                <form class="flex flex-col justify-center items-center my-5 mx-auto bg-gray-100 p-5 rounded-3xl" method="post" action="../controller/addwiki.php" enctype="multipart/form-data">
+                <form class="flex flex-col justify-center items-center my-5 mx-auto bg-gray-100 p-5 rounded-3xl" method="post" action="../controller/editwiki.php?wiki=<?php echo $wiki->__get('id_wiki') ?>" enctype="multipart/form-data">
                     <span class=" my-5 flex text-1xl font-extrabold text-gray-900 md:text-2xl lg:text-3xl">modifier votre wiki
                         <div class="w-2 h-2 rounded-full bg-green-700">
                         </div>
@@ -97,7 +97,7 @@ $tags = Tag::getTags();
                     <div class="flex gap-4 items-center">
                         <div class="mb-5 w-2/4">
                             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Image</label>
-                            <input type="file" value="<?php echo $wiki->__get('image') ?>" name="image" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5" required>
+                            <input type="file" value="" name="image" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5">
                         </div>
                         <div class="mb-5 w-2/4">
                             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Titre</label>
@@ -106,7 +106,7 @@ $tags = Tag::getTags();
                     </div>
                     <div class="mb-5 w-full">
                         <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">contenu</label>
-                        <textarea value="<?php echo $wiki->__get('content') ?>" name="content" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 " required></textarea>
+                        <textarea name="content" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 " required><?php echo $wiki->__get('content') ?></textarea>
                     </div>
                     <div class="mb-5 w-full">
                         <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">categorie</label>
@@ -147,7 +147,7 @@ $tags = Tag::getTags();
                     </div>
 
 
-                    <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800  font-medium rounded-lg text-sm  sm:w-auto px-5 py-2.5 text-center   ">Publier</button>
+                    <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800  font-medium rounded-lg text-sm  sm:w-auto px-5 py-2.5 text-center   ">Modifier</button>
                 </form>
 
             </div>
