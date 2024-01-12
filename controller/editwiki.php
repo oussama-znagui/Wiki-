@@ -16,7 +16,7 @@ if (!$_GET['wiki']) {
     die('errooor');
 }
 
-$wiki = new Wiki($_GET['wiki'], null, null, null, null, null, null, null, null);
+$wiki = new Wiki($_GET['wiki'], null, null, null, null, null, null, null, null,null);
 $wiki = $wiki->getWiki();
 // print_r($wiki);
 $new_name = $wiki->__get('image');
@@ -37,7 +37,7 @@ if ($_FILES['image']['name']) {
     $img_upload_path = '../media/' . $new_name;
     move_uploaded_file($tmp_name, $img_upload_path);
 }
-$newWiki = new Wiki($wiki->__get('id_wiki'), $titre, $content, $new_name, null, null, $categorie, null, null);
+$newWiki = new Wiki($wiki->__get('id_wiki'), $titre, $content, $new_name, null, null, $categorie, null, null,1);
 $newWiki->updateWiki();
 
 if (@$_SESSION['user']->__get('role') == 0) {

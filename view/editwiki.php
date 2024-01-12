@@ -16,7 +16,7 @@ if (!$_GET['wiki']) {
     die('errooor');
 }
 
-$wiki = new Wiki($_GET['wiki'], null, null, null, null, null, null, null, null);
+$wiki = new Wiki($_GET['wiki'], null, null, null, null, null, null, null, null,1);
 $wiki = $wiki->getWiki();
 
 

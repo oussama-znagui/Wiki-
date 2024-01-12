@@ -28,6 +28,6 @@ $tags = $_POST["tags"];
 print_r($tags);
 echo $titre;
 $idUser = $_SESSION['user']->__get('id_user');
-$wiki = new Wiki(NULL, $titre, $content, $new_name, $date, $idUser, $categorie, null, null);
+$wiki = new Wiki(NULL, $titre, $content, $new_name, $date, $idUser, $categorie, null, null, 1);
 $wiki->addWiki();
 header('Location: ../view/profil.php');

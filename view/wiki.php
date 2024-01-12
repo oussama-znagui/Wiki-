@@ -9,7 +9,7 @@ if (!$_GET['wiki']) {
     header('Location: index.php');
 }
 $idwiki = $_GET['wiki'];
-$wiki = new Wiki($idwiki, null, null, null, null, null, null, null, null);
+$wiki = new Wiki($idwiki, null, null, null, null, null, null, null, null, null);
 $wiki = $wiki->getWiki();
 
 

@@ -11,8 +11,9 @@ class Wiki
     private $crationDate;
     private User $user;
     private Categorie $categorie;
+    private $statut;
 
-    public function __construct($idW, $t, $c, $img, $cDate, $idUser, $idC, $cat, $catDesc)
+    public function __construct($idW, $t, $c, $img, $cDate, $idUser, $idC, $cat, $catDesc, $statut)
     {
         $this->id_wiki = $idW;
         $this->titre = $t;
@@ -22,6 +23,7 @@ class Wiki
         $this->user = new User();
         $this->categorie = new Categorie($idC, $cat, $catDesc);
         $this->user->__set("id_user", $idUser);
+        $this->statut = $statut;
     }
 
 
@@ -39,10 +41,11 @@ class Wiki
     public function addWiki()
     {
 
-        $sql = DB::connexion()->prepare("INSERT into wikis values(:id, :titre, :content, :image, :creationDate, :id_user, :id_cat)");
+        $sql = DB::connexion()->prepare("INSERT into wikis values(:id, :titre, :content, :image, :creationDate, :id_user, :id_cat, :statut)");
         $idUser = $this->user->__get("id_user");
         $idCategorie = $this->categorie->__get("id_cat");
         $id = NULL;
+        $statut = 1;
         $sql->bindParam(":id", $id);
         $sql->bindParam(":titre", $this->titre);
         $sql->bindParam(":content", $this->content);
@@ -50,12 +53,8 @@ class Wiki
         $sql->bindParam(":creationDate", $this->crationDate);
         $sql->bindParam(":id_user", $idUser);
         $sql->bindParam(":id_cat", $idCategorie);
-        // echo "----> " . $this->titre;
-        // echo "----> " . $this->content;
-        // echo "----> " . $this->crationDate;
-        // echo "----> " . $this->user->__get("id_user");
-        // echo "----> " . $this->categorie->__get("id_cat");
-        // echo "----> " . $this->image;
+        $sql->bindParam(":statut", $statut);
+
         $sql->execute();
     }
 
@@ -66,7 +65,7 @@ class Wiki
         $result = $sql->fetchAll(PDO::FETCH_ASSOC);
         $wikis = array();
         foreach ($result as $row) {
-            $wiki = new Wiki($row['id_wiki'], $row['titre'], $row['content'], $row['image'], $row['creationDate'], $row['id_user'], $row['id_cat'], $row['categorie'], $row['description']);
+            $wiki = new Wiki($row['id_wiki'], $row['titre'], $row['content'], $row['image'], $row['creationDate'], $row['id_user'], $row['id_cat'], $row['categorie'], $row['description'], $row['statut']);
             $wiki->user->__set("fullName", $row['fullName']);
             array_push($wikis, $wiki);
         }
@@ -82,7 +81,7 @@ class Wiki
         $row = $sql->fetchAll(PDO::FETCH_ASSOC);
 
 
-        $wiki = new Wiki($row[0]['id_wiki'], $row[0]['titre'], $row[0]['content'], $row[0]['image'], $row[0]['creationDate'], $row[0]['id_user'], $row[0]['id_cat'], $row[0]['categorie'], $row[0]['description']);
+        $wiki = new Wiki($row[0]['id_wiki'], $row[0]['titre'], $row[0]['content'], $row[0]['image'], $row[0]['creationDate'], $row[0]['id_user'], $row[0]['id_cat'], $row[0]['categorie'], $row[0]['description'], $row['status']);
         $wiki->user->__set("fullName", $row[0]['fullName']);
 
 
@@ -121,7 +120,7 @@ class Wiki
 
 
 $date = date("Y-m-d");
-$wiki = new Wiki(null, 'first wiki', 'no content', '../media/home.jpg', $date, 1, 2, null, "ssg");
+$wiki = new Wiki(null, 'first wiki', 'no content', '../media/home.jpg', $date, 1, 2, null, "ssg", 1);
 // print_r($wiki);
 
 

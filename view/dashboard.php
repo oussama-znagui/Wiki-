@@ -88,6 +88,80 @@ $tags = Tag::getTags();
                 </div>
             </div>
             <div>
+
+
+                <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                    <h1 class="mb-4 text-3xl font-extrabold text-gray-900  md:text-5xl lg:text-4xl text-center">All Wikis</h1>
+                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            <tr>
+                                <th scope="col" class="px-6 py-3">
+                                    Titre
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    categorie
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Autuer
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Price
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Status
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            foreach ($wikis as $wiki) {
+
+
+                            ?>
+                                <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        <?php echo $wiki->__get('titre') ?>
+                                    </th>
+                                    <td class="px-6 py-4">
+                                        <?php echo $wiki->categorie->__get('titre') ?>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <?php echo $wiki->user->__get('fullName') ?>
+                                    </td>
+                                    <td class="px-6 py-4 flex items-center  gap-4">
+                                        <?php
+                                        if ($wiki->__get("statut") == 1) {
+
+                                        ?>
+                                            <p>Publié</p>
+                                            <div class="w-2 h-2 bg-green-700 rounded-full"></div>
+
+                                        <?php
+
+                                        } else {
+                                        ?>
+                                            <p>Archivé</p>
+                                            <div class="w-2 h-2 bg-red-700 rounded-full"></div>
+                                        <?php
+                                        }
+
+                                        ?>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                    </td>
+                                </tr>
+
+                            <?php
+                            }
+                            ?>
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <div>
                 <h1 class="mb-4 text-3xl font-extrabold text-gray-900  md:text-5xl lg:text-4xl text-center">All Wikis</h1>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 w-4/5 m-auto my-5">
                     <?php
