@@ -11,5 +11,5 @@ if (!$_GET['wiki'] || !$_SESSION['user']) {
 $idw = $_GET['wiki'];
 $wiki = new Wiki($idw, null, null, null, null, null, null, null, null, null);
 $wiki = $wiki->getWiki();
-$wiki->archiverWiki();
+$wiki->désarchiverWiki();
 header('Location: ../view/dashboard.php');

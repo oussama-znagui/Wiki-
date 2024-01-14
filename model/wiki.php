@@ -81,7 +81,7 @@ class Wiki
         $row = $sql->fetchAll(PDO::FETCH_ASSOC);
 
 
-        $wiki = new Wiki($row[0]['id_wiki'], $row[0]['titre'], $row[0]['content'], $row[0]['image'], $row[0]['creationDate'], $row[0]['id_user'], $row[0]['id_cat'], $row[0]['categorie'], $row[0]['description'], $row['status']);
+        $wiki = new Wiki($row[0]['id_wiki'], $row[0]['titre'], $row[0]['content'], $row[0]['image'], $row[0]['creationDate'], $row[0]['id_user'], $row[0]['id_cat'], $row[0]['categorie'], $row[0]['description'], $row[0]['statut']);
         $wiki->user->__set("fullName", $row[0]['fullName']);
 
 
@@ -117,11 +117,17 @@ class Wiki
         $sql->execute();
     }
 
-    public function archiverWiki(){
+    public function archiverWiki()
+    {
         $idw = $this->id_wiki;
-        $sql = DB::connexion()->query("UPDATE wikis set statut where id_wiki = $idw");
+        $sql = DB::connexion()->query("UPDATE wikis set statut = 0 where id_wiki = $idw");
         $sql->execute();
-        
+    }
+    public function désarchiverWiki()
+    {
+        $idw = $this->id_wiki;
+        $sql = DB::connexion()->query("UPDATE wikis set statut = 1 where id_wiki = $idw");
+        $sql->execute();
     }
 }
 

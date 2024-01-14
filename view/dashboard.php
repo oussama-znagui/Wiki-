@@ -152,13 +152,13 @@ $tags = Tag::getTags();
                                         if ($wiki->__get("statut") == 1) {
 
                                         ?>
-                                            <a href="../controller/archiver.php" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Archiver</a>
+                                            <a href="../controller/archiver.php?wiki=<?php echo $wiki->__get('id_wiki') ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Archiver</a>
 
                                         <?php
 
                                         } else {
                                         ?>
-                                            <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Publier</a>
+                                            <a href="../controller/desarchiverWiki.php?wiki=<?php echo $wiki->__get('id_wiki') ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Publier</a>
                                         <?php
                                         }
 
