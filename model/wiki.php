@@ -116,6 +116,13 @@ class Wiki
 
         $sql->execute();
     }
+
+    public function archiverWiki(){
+        $idw = $this->id_wiki;
+        $sql = DB::connexion()->query("UPDATE wikis set statut where id_wiki = $idw");
+        $sql->execute();
+        
+    }
 }
 
 

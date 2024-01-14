@@ -102,7 +102,10 @@ $cat = $_GET['cat'];
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 w-4/5 m-auto my-5">
                 <?php
                 foreach ($wikis as $wiki) {
-                    if ($wiki->categorie->__get('id_cat') == $cat) {
+                    if (
+                        $wiki->categorie->__get('id_cat') == $cat
+                        && $wiki->__get('statut') == 1
+                    ) {
 
                 ?>
                         <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">

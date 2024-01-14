@@ -132,6 +132,15 @@ $wikis = Wiki::getWikis();
                                         </svg>
 
                                     </a>
+                                    <div>
+                                        <?php
+                                        if ($wiki->__get('statut') == 0) {
+                                        ?>
+                                            <p class='text-red-300'>Ce wiki est archiver par l'administration</p>
+                                        <?php
+                                        }
+                                        ?>
+                                    </div>
 
 
                                 </div>
