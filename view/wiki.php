@@ -2,6 +2,8 @@
 
 
 include "../model/wiki.php";
+include "../model/tag.php";
+include "../model/wikiTags.php";
 include "../config/connexion.php";
 session_start();
 
@@ -12,7 +14,9 @@ $idwiki = $_GET['wiki'];
 $wiki = new Wiki($idwiki, null, null, null, null, null, null, null, null, null);
 $wiki = $wiki->getWiki();
 
-
+$tag = new Tag(null, null);
+$wikiTags = new WikiTAgs(null, $wiki, $tag);
+$tags = $wikiTags->getWikiTags();
 
 ?>
 
@@ -103,16 +107,16 @@ $wiki = $wiki->getWiki();
                     <h1 class=" text-1xl font-extrabold text-gray-900  md:text-2xl lg:text-3xl">Titre : <?php echo $wiki->__get('titre') ?></h1>
                     <p class="text-sm  text-gray-600  md:text-lg lg:text-xl">Creer par <?php echo $wiki->user->__get('fullName') ?><br> le <?php echo $wiki->__get('crationDate') ?> </p>
                     <div class="my-4">
+                        <?php
+                        foreach ($tags as $tag) {
+                        ?>
+                            <button type="button" class="m-1 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 "><?php echo $tag->__get("tag") ?></button>
+                        <?php
+                        }
+                        ?>
 
-                        <button type="button" class="m-1 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 ">Dark</button>
-                        <button type="button" class="m-1 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 ">Informatique</button>
-                        <button type="button" class="m-1 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 ">github</button>
-                        <button type="button" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 ">front-end</button>
-                        <button type="button" class="m-1 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 ">ui/ux</button>
-                        <button type="button" class="m-1 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 ">tiktok</button>
-                        <button type="button" class="m-1 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 ">omegle</button>
-                        <button type="button" class="m-1 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 ">technologie</button>
-                        <button type="button" class="m-1 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 ">Youcode</button>
+
+
 
                     </div>
                 </div>

@@ -24,7 +24,7 @@ class Categorie
 
     public static function getCategories()
     {
-        $sql = DB::connexion()->query("SELECT * from categories");
+        $sql = DB::connexion()->query("SELECT * from categories ORDER BY id_cat desc");
         $sql->execute();
         $result = $sql->fetchAll(PDO::FETCH_ASSOC);
         $Categories = array();
@@ -79,6 +79,15 @@ class Categorie
 
 
         $sql->execute();
+    }
+
+    public static function countWiCat()
+    {
+        $sql = DB::connexion()->query("SELECT count(*) as count from categories");
+
+        $sql->execute();
+        $result = $sql->fetchAll(PDO::FETCH_ASSOC);
+        return $result[0]['count'];
     }
 }
 

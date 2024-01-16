@@ -72,4 +72,13 @@ class User
             return $user;
         }
     }
+
+    public static function countUser()
+    {
+        $sql = DB::connexion()->query("SELECT count(*) as count from users where role = 0");
+
+        $sql->execute();
+        $result = $sql->fetchAll(PDO::FETCH_ASSOC);
+        return $result[0]['count'];
+    }
 }

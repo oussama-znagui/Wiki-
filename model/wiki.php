@@ -101,11 +101,11 @@ class Wiki
         $content = $this->content;
         $image = $this->image;
         $cat = $this->categorie->__get('id_cat');
-        echo $idWiki . "   ->";
-        echo $title . "   ->";
-        echo $content . "   ->";
-        echo $image . "   ->";
-        echo $cat . "   ->";
+        // echo $idWiki . "   ->";
+        // echo $title . "   ->";
+        // echo $content . "   ->";
+        // echo $image . "   ->";
+        // echo $cat . "   ->";
         $sql = DB::connexion()->prepare("UPDATE wikis set titre = :title, content = :content, image = :image, id_cat = :cat where id_wiki = :idWiki");
         $sql->bindParam(':idWiki', $idWiki);
         $sql->bindParam(':title', $title);
@@ -128,6 +128,46 @@ class Wiki
         $idw = $this->id_wiki;
         $sql = DB::connexion()->query("UPDATE wikis set statut = 1 where id_wiki = $idw");
         $sql->execute();
+    }
+
+    public function selectLastWikiOfUser()
+    {
+        $idu = $this->user->__get('id_user');
+        $sql = DB::connexion()->query("SELECT * FROM `wikis` WHERE id_user = $idu ORDER BY id_wiki DESC LIMIT 1");
+        $sql->execute();
+        $row = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+
+        $idwiki = $row[0]['id_wiki'];
+
+
+
+        return $idwiki;
+    }
+
+
+
+    public static function getWikisAJAX($text)
+    {
+        $sql = DB::connexion()->query("SELECT * FROM wikis  JOIN categories JOIN users WHERE wikis.id_cat = categories.id_cat AND wikis.id_user = users.id_user AND titre  like '%$text%'");
+        $sql->execute();
+        $result = $sql->fetchAll(PDO::FETCH_ASSOC);
+        $wikis = array();
+        foreach ($result as $row) {
+            $wiki = new Wiki($row['id_wiki'], $row['titre'], $row['content'], $row['image'], $row['creationDate'], $row['id_user'], $row['id_cat'], $row['categorie'], $row['description'], $row['statut']);
+            $wiki->user->__set("fullName", $row['fullName']);
+            array_push($wikis, $wiki);
+        }
+        return $wikis;
+    }
+
+    public static function countWikis()
+    {
+        $sql = DB::connexion()->query("SELECT count(*) as count from wikis");
+
+        $sql->execute();
+        $result = $sql->fetchAll(PDO::FETCH_ASSOC);
+        return $result[0]['count'];
     }
 }
 

@@ -1,17 +1,25 @@
 <?php
-if (@$_GET['error'] == "pass") {
-    $error = 'les deux mots de passe ne sont pas identiques';
+include '../config/connexion.php';
+
+include '../model/tag.php';
+include '../model/user.php';
+
+
+session_start();
+if (!$_GET['tag'] || !$_SESSION['user'] || $_SESSION['user']->__get('role') != 1) {
+    header('Location: index.php');
+    die("eroor");
 }
-if (@$_GET['error'] == "mail") {
-    $error = 'le mail que vous avez saisi est deja existe';
-}
-if (@$_GET['error'] == "passF") {
-    $error = "Veuillez entrer un mot de passe valide comportant au moins une lettre majuscule, une lettre minuscule, un chiffre et comprenant 8 caractères ou plus. Merci !";
-}
+
+$idTag = $_GET['tag'];
+// echo $idCat;
+$tag = new Tag($idTag, null);
+$tag = $tag->getTag();
 
 
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,14 +31,14 @@ if (@$_GET['error'] == "passF") {
 </head>
 
 <body>
-    <header class=" bg-gradient-to-tr from-rose-100 to-teal-100 p-5 min-h-screen flex flex-col justify-around items-center">
+    <header class=" bg-gradient-to-tr from-rose-100 to-teal-100 h-screen flex flex-col justify-around items-center">
         <!-- <h1 class="mb-4 text-3xl font-black text-gray-900  md:text-5xl lg:text-4xl">Wikis</h1> -->
         <nav class="flex justify-between items-center w-3/4">
-            <span class="flex text-1xl font-extrabold text-gray-900  md:text-2xl lg:text-3xl">Wikis
-                <div class="w-2 h-2 rounded-full bg-green-700">
-                </div>
-            </span>
-            <div class="flex items-center gap-6">
+            <a href="index.php"> <span class="flex text-1xl font-extrabold text-gray-900  md:text-2xl lg:text-3xl">Wikis
+                    <div class="w-2 h-2 rounded-full bg-green-700">
+                    </div>
+                </span></a>
+            <ddiv class="flex items-center gap-6">
                 <a class="text-gray-700 hover:text-orange-600" aria-label="Visit TrendyMinds LinkedIn" href="" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="h-5">
                         <path fill="currentColor" d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z">
                         </path>
@@ -56,55 +64,32 @@ if (@$_GET['error'] == "passF") {
                         </path>
                     </svg>
                 </a>
-            </div>
+                </div>
         </nav>
         <div class="w-3/4 flex justify-between items-center ">
             <div class="w-3/5	 ">
 
 
-                <form class="max-w-sm mx-auto" method="post" action="../controller/signup.php">
-                    <span class="my-5 flex text-1xl font-extrabold text-gray-900  md:text-2xl lg:text-3xl">Connectez-vous
+                <form class="max-w-sm mx-auto" method="post" action="../controller/edittag.php?tag=<?php echo $tag->__get('id_tag') ?>">
+                    <span class="my-5 flex text-1xl font-extrabold text-gray-900  md:text-2xl lg:text-3xl">Modifier un tag
                         <div class="w-2 h-2 rounded-full bg-green-700">
                         </div>
                     </span>
-                    <div class="flex gap-4">
-                        <div class="mb-5">
-                            <label class="block mb-2 text-sm font-medium text-gray-900">Nom</label>
-                            <input type="text" name="lName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Alaoui" required>
-                        </div>
-                        <div class="mb-5">
-                            <label class="block mb-2 text-sm font-medium text-gray-900 ">email</label>
-                            <input type="text" name="fName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Mouhamed" required>
-                        </div>
-                    </div>
                     <div class="mb-5">
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">email</label>
-                        <input type="email" name="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="name@wikis.com" required>
+                        <label class="block mb-2 text-sm font-medium text-gray-900">Tag</label>
+                        <input type="text" value="<?php echo $tag->__get('tag') ?>" name="tag" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required>
                     </div>
-                    <div class="mb-5">
-                        <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">mot de pass</label>
-                        <input type="password" name="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required>
-                    </div>
-                    <div class="">
-                        <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirmer le mot de pass</label>
-                        <input type="password" name="cpassword" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
-                    </div>
-                    <?php
-                    if (@$error) {
-                    ?>
-                        <p class="text-red-900 my-2"><?php echo @$error ?></p>
 
-                    <?php
-                    }
-                    ?>
 
-                    <button type="submit" name="go" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Confirmer</button>
+
+                    <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Modifier le tag</button>
                 </form>
+
 
             </div>
 
 
-            <img class="w-1/4" src="../media/home.png" alt="">
+            <img class="w-1/4 " src="../media/home.png" alt="">
 
         </div>
 

@@ -1,10 +1,12 @@
 <?php
 
-include "../model/categorie.php";
-include "../model/user.php";
+
+include "../model/wiki.php";
+
 include "../config/connexion.php";
 session_start();
 $Categories = Categorie::getCategories();
+$wikis = Wiki::getWikis();
 // print_r($Categories);
 // $user = $_SESSION['user'];
 // // print_r($user);
@@ -32,7 +34,7 @@ $Categories = Categorie::getCategories();
                 <div class="w-2 h-2 rounded-full bg-green-700">
                 </div>
             </span>
-            <div class="flex items-center gap-6">
+            <div class=" hidden lg:flex items-center gap-6">
                 <a class="text-gray-700 hover:text-orange-600" aria-label="Visit TrendyMinds LinkedIn" href="" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="h-5">
                         <path fill="currentColor" d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z">
                         </path>
@@ -111,6 +113,84 @@ $Categories = Categorie::getCategories();
 
     </header>
     <section class="bg-gradient-to-br from-rose-100 to-teal-100 py-5">
+        <div class="w-3/4 m-auto">
+            <form class="my-5" method="post">
+                <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                        </svg>
+                    </div>
+                    <input type="search" id="search" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 " placeholder="Search article" required>
+
+                </div>
+            </form>
+            <div class="flex flex-wrap justify-center    gap-4 my-5" id="result">
+
+
+            </div>
+        </div>
+        <div class=" my-10 flex flex-col justify-center  items-center">
+            <h1 class="mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-4xl dark:text-white">Dernier Article</h1>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 w-4/5 m-auto my-5">
+                <?php
+                $i = 0;
+                foreach ($wikis as $wiki) {
+
+                    if ($wiki->__get('statut') == 1) {
+                        $i++;
+                ?>
+                        <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                            <a href="#">
+                                <div class="bg-[url('../media/<?php echo $wiki->__get('image') ?>')] bg-cover	bg-no-repeat	bg-center	w-full h-48">
+
+                                </div>
+
+                            </a>
+                            <div class="p-5">
+                                <a href="#" class="flex justify-between items-start">
+                                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"><?php echo $wiki->__get('titre') ?></h5>
+                                    <p class='text-sm text-gray-700'>Creer le <?php echo $wiki->__get('crationDate') ?></p>
+                                </a>
+                                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"><?php
+                                                                                                if (str_word_count($wiki->__get('content')) <= 5) {
+                                                                                                    echo $wiki->__get('content');
+                                                                                                } else {
+                                                                                                    $pieces = explode(" ", $wiki->__get('content'));
+                                                                                                    for ($i = 0; $i < 5; $i++) {
+                                                                                                        echo $pieces[$i] . ' ';
+                                                                                                    }
+                                                                                                    echo '.....';
+                                                                                                }
+                                                                                                ?>.</p>
+                                <a href="wiki.php?wiki=<?php echo $wiki->__get('id_wiki') ?>" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                    Read more
+                                    <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
+                                    </svg>
+                                </a>
+
+
+
+
+                            </div>
+                        </div>
+                <?php
+                    }
+                    if ($i == 3) {
+                        break;
+                    }
+                }
+
+
+                ?>
+
+
+
+            </div>
+
+        </div>
         <div class="flex flex-col justify-center  items-center">
             <h1 class="mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-4xl dark:text-white">Consulter votre categorie prefere</h1>
             <p class="w-3/4 m-auto text-center mb-6 text-lg font-normal text-gray-500 lg:text-lg sm:px-16 xl:px-48">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos molestias rerum, autem illum similique dolor accusantium obcaecati.</p>
@@ -195,6 +275,7 @@ $Categories = Categorie::getCategories();
         </footer>
 
     </section>
+    <script src="../controller/main.js"></script>
 </body>
 
 </html>

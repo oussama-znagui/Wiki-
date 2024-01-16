@@ -16,7 +16,7 @@ if (!$_GET['wiki']) {
     die('errooor');
 }
 
-$wiki = new Wiki($_GET['wiki'], null, null, null, null, null, null, null, null,1);
+$wiki = new Wiki($_GET['wiki'], null, null, null, null, null, null, null, null, 1);
 $wiki = $wiki->getWiki();
 
 
@@ -135,7 +135,7 @@ $tags = Tag::getTags();
 
                         ?>
                             <div class="flex items-center mb-4">
-                                <input name="tags[]" type="checkbox" value="<?php echo $tag->__get('tag') ?>" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded ">
+                                <input name="tags[]" type="checkbox" value="<?php echo $tag->__get('id_tag') ?>" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded ">
                                 <label for="default-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"><?php echo $tag->__get('tag') ?></label>
                             </div>
                         <?php

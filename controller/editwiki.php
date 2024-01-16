@@ -3,6 +3,7 @@
 include '../config/connexion.php';
 include '../model/wiki.php';
 include '../model/tag.php';
+include '../model/wikiTAgs.php';
 
 session_start();
 if (!$_SESSION['user']) {
@@ -16,13 +17,14 @@ if (!$_GET['wiki']) {
     die('errooor');
 }
 
-$wiki = new Wiki($_GET['wiki'], null, null, null, null, null, null, null, null,null);
+$wiki = new Wiki($_GET['wiki'], null, null, null, null, null, null, null, null, null);
 $wiki = $wiki->getWiki();
 // print_r($wiki);
 $new_name = $wiki->__get('image');
 $titre = $_POST['titre'];
 $content = $_POST['content'];
 $categorie = $_POST["cat"];
+$tags = $_POST["tags"];
 
 if ($_FILES['image']['name']) {
     $image_name = $_FILES['image']['name'];
@@ -37,8 +39,24 @@ if ($_FILES['image']['name']) {
     $img_upload_path = '../media/' . $new_name;
     move_uploaded_file($tmp_name, $img_upload_path);
 }
-$newWiki = new Wiki($wiki->__get('id_wiki'), $titre, $content, $new_name, null, null, $categorie, null, null,1);
+$newWiki = new Wiki($wiki->__get('id_wiki'), $titre, $content, $new_name, null, null, $categorie, null, null, 1);
 $newWiki->updateWiki();
+// print_r($newWiki);
+$tag = new Tag(null, null);
+
+$wikiTags = new WikiTAgs(null, $newWiki, $tag);
+$wikiTags->deleteTags();
+
+
+foreach ($tags as $idtag) {
+    $tag = new Tag($idtag, null);
+    $tag = $tag->getTag();
+    $wikiTag = new WikiTAgs(null, $newWiki, $tag);
+    // print_r($wikiTag);
+    $wikiTag->addWikiTags();
+    // echo "a";
+}
+
 
 if (@$_SESSION['user']->__get('role') == 0) {
     header('Location: ../view/profil.php');

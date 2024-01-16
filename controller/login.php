@@ -12,9 +12,11 @@ include '../model/user.php';
 session_start();
 $email = $_POST['email'];
 $password = $_POST['password'];
+$password = md5($password);
 $user = new User();
 $user->__set("email", $email);
 $user->__set("password", $password);
+
 if (!$user->login()) {
     header('Location: ../view/login.php?error=log');
     die('error');
